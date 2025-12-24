@@ -18,7 +18,7 @@ public class LoginCommand implements CommandExecutor {
 
         if (!(sender instanceof Player player)) return true;
 
-        if (!auth.isRegistered(player.getName())) {
+        if (!auth.isRegistered(player.getUniqueId())) {
             player.sendMessage("§cNajpierw się zarejestruj!");
             return true;
         }
@@ -28,7 +28,7 @@ public class LoginCommand implements CommandExecutor {
             return true;
         }
 
-        if (auth.login(player.getName(), args[0])) {
+        if (auth.login(player.getUniqueId(), args[0])) {
             auth.setLogged(player);
             player.sendMessage("§aZalogowano!");
         } else {
