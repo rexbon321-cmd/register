@@ -1,0 +1,10 @@
+name: AuthNonPremium
+version: 1.0
+main: pl.authnonpremium.AuthPlugin
+api-version: 1.20
+
+commands:
+  register:
+    usage: /register <hasło>
+  login:
+    usage: /login <hasło>
