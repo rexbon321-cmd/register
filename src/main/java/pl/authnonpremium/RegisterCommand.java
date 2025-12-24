@@ -18,18 +18,24 @@ public class RegisterCommand implements CommandExecutor {
 
         if (!(sender instanceof Player player)) return true;
 
-        if (auth.isRegistered(player.getName())) {
+        if (auth.isRegistered(player.getUniqueId())) {
             player.sendMessage("§cJuż jesteś zarejestrowany!");
             return true;
         }
 
-        if (args.length != 1) {
-            player.sendMessage("§c/register <hasło>");
+        if (args.length != 2) {
+            player.sendMessage("§c/register <hasło> <powtórz hasło>");
             return true;
         }
 
-        auth.register(player.getName(), args[0]);
-        player.sendMessage("§aZarejestrowano pomyślnie!");
+        if (!args[0].equals(args[1])) {
+            player.sendMessage("§cHasła nie są takie same!");
+            return true;
+        }
+
+        auth.register(player.getUniqueId(), args[0]);
+        auth.setLogged(player);
+        player.sendMessage("§aZarejestrowano i zalogowano!");
         return true;
     }
 }
